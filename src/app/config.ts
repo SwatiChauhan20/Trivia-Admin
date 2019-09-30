@@ -3,7 +3,9 @@ const baseUrl = "https://admin.triviapost.in:5000/api/";
 
 
 // const mediaUrl = "http://192.168.1.83/Trivia/";
-const mediaUrl = "https://admin.triviapost.in:5000/";
+// const mediaUrl = "https://admin.triviapost.in:5000/";
+
+const mediaUrl = "https://admin.triviapost.in/server/";
 
 
 export const config = {
