@@ -121,7 +121,7 @@ export class SubAdminComponent implements OnInit {
   }
 
   updateSubAdmin(subAdmin) {
-    subAdmin["userId"] = (<HTMLInputElement>document.getElementById("hey")).value;
+    subAdmin["userId"] = (<HTMLInputElement>document.getElementById("subAdminId")).value;
 
     console.log(subAdmin);
     this._subAdminService.updateSubAdmin(subAdmin).subscribe((res: any) => {

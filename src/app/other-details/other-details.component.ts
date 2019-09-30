@@ -78,6 +78,12 @@ export class OtherDetailsComponent implements OnInit {
             }
         }
         this._subAdmin.addOtherDetails(data).subscribe((res: any) => {
+            Swal.fire({
+                type: 'success',
+                title: res.message,
+                showConfirmButton: false,
+                timer: 2000
+            })
             this.details.reset();
             this.getOtherDetails();
         }, err => {
@@ -85,7 +91,7 @@ export class OtherDetailsComponent implements OnInit {
         })
     }
     updateDetail(details) {
-        details["termsId"] = (<HTMLInputElement>document.getElementById("hey")).value;
+        details["termsId"] = (<HTMLInputElement>document.getElementById("termsId")).value;
         console.log('Other Detail Inside Update:', details);
         const data = new FormData();
         _.forOwn(details, (value, key) => {

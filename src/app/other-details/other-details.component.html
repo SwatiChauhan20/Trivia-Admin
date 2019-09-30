@@ -55,7 +55,14 @@
 										(change)="logoImage($event)">
 								</label>
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-5">
+									<div class="form-group">
+										<label class="bmd-label-floating" for="comment">Application Link</label>
+										<input type="text" class="form-control" formControlName="applink" name="applink"
+											required="required">
+									</div>
+								</div>
+							<div class="col-md-5">
 								<div *ngIf="url">
 									<img [src]="url" style="height: 200px; width: 200px;">
 								</div>
@@ -69,12 +76,14 @@
 						<div class="row">
 							<div class="col-md-6">
 								<h4 class="text-primary">Privacy Policy: </h4>
-								<ckeditor [config]="config" formControlName="policy" [(ngModel)]="otherDetails.policy" style="color: black">
+								<ckeditor [config]="config" formControlName="policy" [(ngModel)]="otherDetails.policy"
+									style="color: black">
 								</ckeditor>
 							</div>
 							<div class="col-md-6">
 								<h4 class="text-primary">Terms and Condition:</h4>
-								<ckeditor [config]="config" formControlName="terms" [(ngModel)]="otherDetails.terms" style="color: black">
+								<ckeditor [config]="config" formControlName="terms" [(ngModel)]="otherDetails.terms"
+									style="color: black">
 								</ckeditor>
 							</div>
 						</div>
@@ -125,7 +134,7 @@
 			</div>
 			<div class="modal-body mx-3">
 				<form [formGroup]="editDetail" *ngIf="other">
-					<input type="hidden" id="hey" name="termsId" value="{{other.termsId}}">
+					<input type="hidden" id="termsId"  value="{{other.termsId}}">
 					<div class="col-md-12">
 						<div class="form-group">
 							<label class="bmd-label-floating">Application Link</label>
@@ -141,11 +150,10 @@
 							</ckeditor>
 						</div>
 						<div class="col-md-6">
-								<label class="input-file-button" for="hello1"><span> Choose File</span>
-									<input type="file" id="hello1" accept=".jpeg, .jpg, .png, .gif"
-										formControlName="logo" [(ngModel)]="otherDetails.logo"
-										(change)="logoImage($event)">
-								</label>
+							<label class="input-file-button" for="hello1"><span> Choose File</span>
+								<input type="file" id="hello1" accept=".jpeg, .jpg, .png, .gif" formControlName="logo"
+									[(ngModel)]="otherDetails.logo" (change)="logoImage($event)">
+							</label>
 							<!-- <input type="file" accept=".jpeg, .jpg, .png, .gif" formControlName="logo"
 								[(ngModel)]="otherDetails.logo" (change)="logoImage($event)"> -->
 						</div>
