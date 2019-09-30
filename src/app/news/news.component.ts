@@ -116,7 +116,7 @@ export class NewsComponent implements OnInit {
 
 		this._newsService.getAllNews().subscribe(
 			(res: News[]) => {
-				console.log("news responde =====>" , res);
+				// console.log("news responde =====>" , res);
 				this.news_array = res;
 			},
 			(err) => {
@@ -188,7 +188,8 @@ export class NewsComponent implements OnInit {
 	}
 
 	updateCat(news) {
-		news["newsId"] = (<HTMLInputElement>document.getElementById("hey")).value;
+		// console.log((<HTMLInputElement>document.getElementById("please")));
+		news["newsId"] = (<HTMLInputElement>document.getElementById("please")).value;
 		console.log("news in update cat", news);
 		const data = new FormData();
 		_.forOwn(this.editnews_form.value, (value, key) => {
@@ -201,6 +202,9 @@ export class NewsComponent implements OnInit {
 			}
 		}
 		this._newsService.updateNews(data, news.newsId).subscribe((res: any) => {
+
+			console.log('NewsId', news.newsId);
+
 			console.log("res=========>", res);
 			this.editnews_form.reset();
 			Swal.fire({

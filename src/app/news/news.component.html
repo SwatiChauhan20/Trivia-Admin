@@ -279,14 +279,13 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="text-center">Edit News</h4>
+				<h4 class="text-center">Editt News</h4>
 				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
 			<div class="modal-body mx-3">
 				<form [formGroup]="editnews_form" *ngIf="singleNews">
-					<input type="text" id="hey" hidden value="{{singleNews.newsId}}">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
@@ -294,6 +293,7 @@
 								<input class="form-control" type="text" formControlName="newsTitleEnglish"
 								[(ngModel)]="singleNews.newsTitleEnglish">
 							</div>
+							<input type="text" id="please" hidden value="{{singleNews.newsId}}">
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
