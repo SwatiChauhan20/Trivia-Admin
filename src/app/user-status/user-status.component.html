@@ -181,7 +181,7 @@
 							<td>{{user.name}}</td>
 							<td>{{user.email}}</td>
 							<td>{{user.createdAt | date: 'short'}}</td>
-							<td> <a href="void(0)" style="cursor:pointer;" aria-hidden="true" data-toggle="modal"
+							<td><a href="void(0)" style="cursor:pointer;" aria-hidden="true" data-toggle="modal"
 									data-target="#feedbackmodal" (click)="viewMore(user)">View
 									Detail</a></td>
 						</tr>
@@ -189,7 +189,7 @@
 				</table>
 			</div>
 			<div class="justify-content-center w-100">
-				<pagination-controls id="pagination1" (pageChange)="p = $event"></pagination-controls>
+				<pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls>
 			</div>
 		</div>
 	</div>
