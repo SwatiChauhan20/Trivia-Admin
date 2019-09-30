@@ -1,0 +1,21 @@
+.privacy .card,
+.terms .card{
+    max-height: 300px;
+    overflow-y: scroll; 
+}
+label.input-file-button {
+    background-color: #f84e5c;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+label.input-file-button span {
+    cursor: pointer;
+  }
+  
+  .input-file-button input[type="file"] {
+    display: none;
+  }
+  

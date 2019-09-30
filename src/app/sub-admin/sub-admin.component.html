@@ -1,0 +1,180 @@
+<div class="container-fluid">
+	<!-- <div class="row">
+		<button class="btn btn-primary float-right ml-auto" data-toggle="modal"
+			data-target="#modaladdTechnologyForm">Add
+			Sub-Admin</button>
+
+		<div class="card" id="allRecords">
+			<div class="card-header card-header-primary">
+				<h4 class="card-title ">All Sub-Admin</h4>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Date Of Joining</th>
+							<th class="text-center" colspan="2">Action</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let subadmin of subadmin_array">
+								<td>{{subadmin.firstName}} {{subadmin.lastName}}</td>
+								<td>{{subadmin.email}}</td>
+								<td>{{subadmin.createdAt| date: 'short'}}</td>
+								<td class="text-center"> <i class="fas fa-edit" aria-hidden="true" data-toggle="modal"
+										data-target="#myModal" (click)="editSubAdmin(subadmin)"
+										style="cursor:pointer;"></i></td>
+								<td class="text-center"><i class="fas fa-trash" style="cursor:pointer;"
+										(click)="deleteSubAdmin(subadmin.userId)"></i>
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<div class="header header-bg bg-gradient-primary pb-3 pt-4">
+		<h1 class="text-uppercase pl-3 text-white">Sub Admin</h1>
+	</div>
+	<div class="row mt-2">
+		<div class="col-xl mb-5 mb-xl-0">
+			<div class="card shadow" id="allRecords">
+				<div class="card-header border-0">
+					<div class="row align-items-center">
+						<div class="col">
+							<h3 class="mb-0">All Sub-Admin</h3>
+						</div>
+						<div class="col text-right">
+							<button class="btn btn-primary float-right ml-auto" data-toggle="modal"
+								data-target="#modaladdTechnologyForm">Add
+								Sub-Admin</button>
+						</div>
+					</div>
+				</div>
+				<div class="table-responsive">
+					<!-- Projects table -->
+					<table class="table align-items-center table-flush">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Name</th>
+								<th scope="col">Email</th>
+								<th scope="col">Date Of Joining</th>
+								<th scope="col">Edit</th>
+								<th scope="col">Remove</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let subadmin of subadmin_array| paginate: { itemsPerPage: 5, currentPage: Page } ; let i = index">
+								<td>{{(5*(Page-1)+i)+1}} </td>
+								<td>{{subadmin.firstName}} {{subadmin.lastName}}</td>
+								<td>{{subadmin.email}}</td>
+								<td>{{subadmin.createdAt| date: 'short'}}</td>
+								<td> <i class="fas fa-edit fa-1x text-info ml-2" aria-hidden="true" data-toggle="modal"
+										data-target="#myModal" (click)="editSubAdmin(subadmin)"
+										style="cursor:pointer;"></i></td>
+								<td><i class="fas fa-trash fa-1x text-danger ml-4" style="cursor:pointer;"
+										(click)="deleteSubAdmin(subadmin.userId)"></i>
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+					<div class="justify-content-center w-100 mt-2">
+							<pagination-controls (pageChange)="Page = $event"></pagination-controls>
+						<!-- <pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="modaladdTechnologyForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="text-center">Add Sub-Admin</h4>
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body mx-3 p-0">
+				<form [formGroup]="subadminForm">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="bmd-label-floating ml-2">FirstName</label>
+							<input type="text" class="form-control" formControlName="firstName"
+								[(ngModel)]="subadmin.firstName">
+						</div>
+						<div class="form-group">
+							<label class="bmd-label-floating ml-2">LastName:</label>
+							<input type="text" class="form-control" formControlName="lastName"
+								[(ngModel)]="subadmin.lastName">
+						</div>
+						<div class="form-group">
+							<label class="bmd-label-floating ml-2">Email:</label>
+							<input type="email" class="form-control" formControlName="email"
+								[(ngModel)]="subadmin.email">
+						</div>
+						<div class="form-group">
+							<label class="bmd-label-floating ml-2">Password:</label>
+							<input type="password" class="form-control" formControlName="password"
+								[(ngModel)]="subadmin.password">
+						</div>
+						<button type="submit" class="btn btn-primary px-6" name="categories_submit"
+							[disabled]="!subadminForm.valid" (click)="addSubAdmin(subadmin)">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="text-center">Update Sub-Admin</h4>
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form [formGroup]="editsubadminForm" *ngIf="singleSubAdmin">
+					<input type="text" id="hey" value="{{singleSubAdmin.userId}}" hidden>
+
+					<div class="form-group">
+						<label for="pwd" class="bmd-label-floating">First Name:</label>
+						<input class="form-control" type="text" formControlName="firstName"
+							[(ngModel)]="singleSubAdmin.firstName">
+					</div>
+
+					<div class="form-group">
+						<label for="pwd" class="bmd-label-floating">Last Name:</label>
+						<input class="form-control" type="text" formControlName="lastName"
+							[(ngModel)]="singleSubAdmin.lastName">
+					</div>
+
+					<div class="form-group">
+						<label for="pwd" class="bmd-label-floating">Email:</label>
+						<input class="form-control" type="text" formControlName="email"
+							[(ngModel)]="singleSubAdmin.email">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal"
+					(click)="updateSubAdmin(editsubadminForm.value )">Update</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"
+					(click)="resetUpdateForm()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

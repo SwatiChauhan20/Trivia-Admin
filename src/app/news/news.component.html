@@ -1,0 +1,368 @@
+<!-- <div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-primary font-weight-bold">Add New Trivia Post</h3>
+			<form [formGroup]="news_form" (ngSubmit)="addNews()">
+				<div class="row">
+					<div class="col-md-4">
+						<select formControlName="categoryId" class="form-control form-control-sm">
+							<option selected="selected" disabled="disabled" value="">Choose category</option>
+							<option *ngFor="let category of category_array" value="{{category.categoryId}}">
+								{{category.categoryTitle}}
+							</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<select formControlName="newsType" class="form-control form-control-sm">
+							<option selected="selected" disabled="disabled" value="">Choose Template</option>
+							<option value="shortnews">Short News</option>
+							<option value="twoslides">Two Slides</option>
+							<option value="multipleslides">Multiple Slides</option>
+						</select>
+					</div>
+					<div class="col-md-4 form-group-custom">
+						<div class="form-group">
+							<input type="file" accept=".jpeg, .jpg, .png, .gif" formControlName="newsImage"
+								name="categoryImage" required="required" (change)="news_image($event)">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<img [src]="urls" class="rounded mb-3" width="180" class="p-2">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 mt-3">
+						<div class="form-group">
+							<label class="bmd-label-floating" for="comment">News Title (English):</label>
+							<textarea class="form-control" formControlName="newsTitleEnglish" name="categoryTitle"
+								required="required" rows="3" id="comment"></textarea>
+						</div>
+					</div>
+					<div class="col-md-6 mt-3">
+						<div class="form-group">
+							<label class="bmd-label-floating" for="comment">News Title (Hindi):</label>
+							<textarea class="form-control" formControlName="newsTitleHindi" name="categoryTitle"
+								required="required" rows="3" id="comment"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						News (English):<br>
+						<ckeditor formControlName="newsEnglish" [config]="config"></ckeditor><br><br>
+					</div>
+					<div class="col-md-6">
+						News (Hindi):<br>
+						<ckeditor formControlName="newsHindi" [config]="config"></ckeditor><br><br>
+					</div>
+				</div>
+
+
+				<input type="submit" name="categories_submit" [disabled]="!news_form.valid"
+					class="btn btn-primary mb-5">
+			</form>
+		</div>
+		<div class="card" id="allRecords">
+			<div class="card-header card-header-primary">
+				<h4 class="card-title ">All Trivia Post</h4>
+			</div>
+			<div class="card-body">
+				<div class="table table-responsive">
+					<table class="table">
+						<thead>
+							<th>Title</th>
+							<th>Category</th>
+							<th class="text-center">Edit</th>
+							<th class="text-center">Delete</th>
+							<th>Date</th>
+							<th class="text-center">English Views</th>
+							<th class="text-center">Hindi Views</th>
+							<th class="text-center">News Status</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let news of news_array | paginate: { itemsPerPage: 3, currentPage: P }">
+								<td>{{news.newsTitleEnglish}}</td>
+								<td>
+									{{news.newsCategory}}
+								</td>
+								<td class="text-center"><i class="fas fa-edit" style="cursor:pointer"
+										data-toggle="modal" data-target="#myModal" (click)="editNews(news)"
+										aria-hidden="true"></i></td>
+								<td class="text-center"><i class="fas fa-trash" style="cursor:pointer"
+										(click)="deleteNews(news.newsId)" aria-hidden="true"></i>
+								</td>
+								<td>{{news.createdAt | date: 'short'}}</td>
+								<td class="text-center">{{news.englishViews}}</td>
+								<td class="text-center">{{news.hindiViews}}</td>
+								<td class="text-center">{{news.isApproved}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="justify-content-center w-100">
+						<pagination-controls (pageChange)="P = $event"></pagination-controls>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+
+
+
+
+<div class="header header-bg bg-gradient-primary pb-3 pt-4">
+	<h1 class="text-uppercase pl-3 text-white">Categories wise Posts</h1>
+</div>
+<div class="container-fluid">
+	<form [formGroup]="news_form" (ngSubmit)="addNews()">
+		<div class="row">
+			<div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+				<div class="card card-profile shadow">
+					<div class="card-body">
+						<div class="row justify-content-center">
+							<div class="col-12 form-group-custom">
+								<div class="form-group">
+									<label class="input-file-button" for="hello"><span> Choose File</span>
+										<input type="file" id="hello" accept=".jpeg, .jpg, .png, .gif"
+											formControlName="newsImage" name="categoryImage" required="required"
+											(change)="news_image($event)">
+									</label>
+								</div>
+							</div>
+							<div class="col-12">
+								<img [src]="urls" class="rounded mb-3 p-2" width="100%">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-8 order-xl-1">
+				<div class="card bg-secondary shadow">
+					<div class="card-header bg-white border-0">
+						<div class="row align-items-center">
+							<div class="col-8">
+								<h2 class="mb-0">Add New Post</h2>
+							</div>
+						</div>
+					</div>
+					<div class="card-body">
+						<form [formGroup]="news_form" (ngSubmit)="addNews()">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<select formControlName="categoryId" class="form-control">
+											<option selected="selected" disabled="disabled" value="">Choose category
+											</option>
+											<option *ngFor="let category of category_array"
+												value="{{category.categoryId}}">
+												{{category.categoryTitle}}
+											</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<select formControlName="newsType" class="form-control">
+											<option selected="selected" disabled="disabled" value="">Choose Template
+											</option>
+											<option value="shortnews">Short News</option>
+											<option value="twoslides">Two Slides</option>
+											<option value="multipleslides">Multiple Slides</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<hr class="my-4" />
+							<!-- Address -->
+							<div class="row">
+								<div class="col-md-6 mt-3">
+									<div class="form-group">
+										<label class="bmd-label-floating ml-2" for="comment">News Title
+											(English):</label>
+										<textarea class="form-control" formControlName="newsTitleEnglish"
+											name="categoryTitle" required="required" rows="3" id="comment"></textarea>
+									</div>
+								</div>
+								<div class="col-md-6 mt-3">
+									<div class="form-group">
+										<label class="bmd-label-floating ml-2" for="comment">News Title
+											(Hindi):</label>
+										<textarea class="form-control" formControlName="newsTitleHindi"
+											name="categoryTitle" required="required" rows="3" id="comment"></textarea>
+									</div>
+								</div>
+							</div>
+							<hr class="my-4" />
+							<div class="row">
+								<div class="col-md-6 pl-2">
+									<h3> News (English):</h3>
+									<ckeditor formControlName="newsEnglish" [config]="config" style="color: black;">
+									</ckeditor><br><br>
+								</div>
+								<div class="col-md-6 pl-2">
+									<h3>News (Hindi):</h3>
+									<ckeditor formControlName="newsHindi" [config]="config" style="color: black">
+									</ckeditor><br><br>
+								</div>
+							</div>
+							<input type="submit" name="categories_submit" [disabled]="!news_form.valid"
+								class="btn btn-primary mb-5">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="row mt-2">
+		<div class="col-xl mb-5 mb-xl-0">
+			<div class="card shadow" id="allRecords">
+				<div class="card-header border-0">
+					<div class="row align-items-center">
+						<div class="col">
+							<h3 class="mb-0">All Trivia Post</h3>
+						</div>
+						<!-- <div class="col text-right">
+							<a href="#!" class="btn btn-sm btn-primary">View All</a>
+						</div> -->
+					</div>
+				</div>
+				<div class="table-responsive">
+					<!-- Projects table -->
+					<table class="table align-items-center table-flush">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">News Title (English)</th>
+								<th scope="col">News Title (Hindi)</th>
+								<th scope="col">Category</th>
+								<th scope="col">Edit</th>
+								<th scope="col">Delete</th>
+								<th scope="col">Date</th>
+								<th scope="col">English Views</th>
+								<th scope="col">Hindi Views</th>
+								<th scope="col">News Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let news of news_array | paginate: { itemsPerPage: 3, currentPage: P }">
+								<td>{{news.newsTitleEnglish}}</td>
+								<td>{{news.newsTitleHindi}}</td>
+								<td>
+									{{news.newsCategory}}
+								</td>
+								<td><i class="fas fa-edit fa-1x text-info ml-2" style="cursor:pointer"
+										data-toggle="modal" data-target="#myModal" (click)="editNews(news)"
+										aria-hidden="true"></i></td>
+								<td><i class="fas fa-trash fa-1x text-danger ml-4" style="cursor:pointer"
+										(click)="deleteNews(news.newsId)" aria-hidden="true"></i>
+								</td>
+								<td>{{news.createdAt | date: 'short'}}</td>
+								<td>{{news.englishViews}}</td>
+								<td>{{news.hindiViews}}</td>
+								<td>{{news.isApproved}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="justify-content-center w-100 mt-2">
+							<pagination-controls (pageChange)="P = $event"></pagination-controls>
+						<!-- <pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="text-center">Edit News</h4>
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body mx-3">
+				<form [formGroup]="editnews_form" *ngIf="singleNews">
+					<input type="text" id="hey" hidden value="{{singleNews.newsId}}">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="bmd-label-floating">NewsTitle(English)</label>
+								<input class="form-control" type="text" formControlName="newsTitleEnglish"
+								[(ngModel)]="singleNews.newsTitleEnglish">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="bmd-label-floating">NewsTitle(Hindi)</label>
+								<input class="form-control" type="text" formControlName="newsTitleHindi"
+								[(ngModel)]="singleNews.newsTitleHindi">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<select class="browser-default custom-select custom-select-md mb-1"
+									formControlName="categoryId" *ngIf="singleNews.newsCategoryId"
+									[(ngModel)]="singleNews.newsCategoryId">
+									<option selected="selected" disabled="disabled" value="">Choose category</option>
+									<option *ngFor="let category of category_array" value="{{category.categoryId}}">
+										{{category.categoryTitle}}
+									</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<select class="browser-default custom-select custom-select-md mb-1"
+									formControlName="newsType" *ngIf="singleNews.newsType"
+									[(ngModel)]="singleNews.newsType">
+									<option selected="selected" disabled="disabled" value="">Choose Template</option>
+									<option value="shortnews">Short News</option>
+									<option value="twoslides">Two Slides</option>
+									<option value="multipleslides">Multiple Slides</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-group">
+							<ckeditor formControlName="newsEnglish" [(ngModel)]="singleNews.newsEnglish"
+								[config]="config">
+							</ckeditor>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-group">
+							<ckeditor formControlName="newsHindi" [(ngModel)]="singleNews.newsHindi" [config]="config">
+							</ckeditor>
+						</div>
+					</div>
+					<label class="input-file-button" for="hello"><span> Choose File</span>
+						<input type="file" id="hello" accept=".jpeg, .jpg, .png, .gif"
+							formControlName="newsImage" name="categoryImage" required="required"
+							(change)="addFile($event)">
+					</label>
+					<!-- <div class="col-md-6">
+						<input type="file" accept=".jpeg, .jpg, .png, .gif" formControlName="newsImage"
+							(change)="addFile($event)"><br><br>
+					</div> -->
+					<div class="col-md-6" *ngIf="url">
+						<img [src]="url" height="50px" width="50px">
+					</div>
+					<div class="col-md-6" *ngIf="!url">
+						<img src="{{mediaPath}}{{singleNews.newsImage}}" height="100px" width="100px">
+					</div>
+					<div class="d-flex float-right">
+						<button type="button" class="btn btn-primary mb-5" data-dismiss="modal"
+							(click)="updateCat(editnews_form.value)">Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

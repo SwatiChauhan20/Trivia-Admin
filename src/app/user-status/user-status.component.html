@@ -1,0 +1,237 @@
+<!-- <div class="container">
+	<div class="row" style="margin: 15px;">
+		<div class="col-md-12">
+			<h3 style="float: left;">Current App Users</h3>
+			<div style="float: left; margin-top: 13px; padding: 0px 7px; border-radius: 50%; color: white; background-color: #c51c24;"
+				*ngIf="userCount">
+				{{userCount}}</div>
+			<div style="float: left; margin-top: 13px;padding: 0px 7px; border-radius: 50%;color: white; background-color: #c51c24;"
+				*ngIf="!userCount">0
+			</div>
+		</div>
+	</div>
+	<div class="card" id="allRecords">
+		<div class="card-header card-header-primary">
+			<h4 class="card-title ">New Users</h4>
+		</div>
+		<div class="card-body">
+			<div class="table table-responsive">
+				<table class="table">
+					<thead>
+						<th>Sr. No.</th>
+						<th class="text-center">User Name</th>
+						<th>Email</th>
+						<th>Date of Registeration</th>
+						<th>Time</th>
+					</thead>
+					<tbody>
+						<tr
+							*ngFor="let User of user_array|paginate: {id: 'pagination1', itemsPerPage: 5, currentPage: p };let i=index">
+							<td>{{(5*(p-1)+i)+1}} </td>
+							<td class="text-center" *ngIf="User.userName">{{User.userName}}</td>
+							<td class="text-center" *ngIf="!User.userName">-</td>
+							<td>{{User.email}}</td>
+							<td>{{User.createdAt | date: 'dd/MM/yyyy'}}</td>
+							<td>{{User.createdAt | date: 'hh:mm a'}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="justify-content-center w-100">
+					<pagination-controls id="pagination1" (pageChange)="p = $event"></pagination-controls>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card" id="allRecords">
+		<div class="card-header card-header-primary">
+			<h4 class="card-title ">User Feedback</h4>
+		</div>
+		<div class="card-body">
+			<div class="table table-responsive">
+				<table class="table">
+					<thead>
+						<th>Sr. No.</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Submitted At</th>
+						<th class="text-center">View More</th>
+					</thead>
+					<tbody>
+						<tr
+							*ngFor="let user of feedback_array|paginate: { id: 'pagination2',itemsPerPage: 5, currentPage: Page };let i=index">
+							<td>{{(5*(Page-1)+i)+1}} </td>
+							<td>{{user.name}}</td>
+							<td>{{user.email}}</td>
+							<td>{{user.createdAt | date: 'short'}}</td>
+							<td class="text-center"> <a href="void(0)" style="cursor:pointer;" aria-hidden="true"
+									data-toggle="modal" data-target="#feedbackmodal" (click)="viewMore(user)">View
+									Detail</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="justify-content-center w-100">
+					<pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="feedbackmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="text-center">User Feedback</h4>
+					<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body mx-3" *ngIf="singlefeedback">
+					<div>
+						Name:{{singlefeedback.name}}
+					</div>
+					<div>
+						email:{{singlefeedback.email}}
+					</div>
+					<div>
+						Mobile:{{singlefeedback.mobile}}
+					</div>
+					<div>
+						Message:{{singlefeedback.message}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+
+<div class="header header-bg bg-gradient-primary pb-3 pt-4">
+	<h1 class="text-uppercase pl-3 text-white">User Status</h1>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h2 style="float: left;">Current App Users</h2>
+		<div style="float: left; margin-top: -14px; padding: 1px 8px; border-radius: 50%; color: white; background-color: #fa646d;"
+			*ngIf="userCount">
+			{{userCount}}</div>
+		<div style="float: left; margin-top: -14px;padding: 1px 8px; border-radius: 50%;color: white; background-color: #fa646d;"
+			*ngIf="!userCount">0
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<div class="card shadow" id="allRecords">
+			<div class="card-header border-0">
+				<h3 class="mb-0">New Users</h3>
+			</div>
+			<div class="table-responsive">
+				<table class="table align-items-center table-flush">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Sr. No.</th>
+							<th scope="col">User Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Date of Registeration</th>
+							<th scope="col">Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							*ngFor="let User of user_array|paginate: {id: 'pagination1', itemsPerPage: 5, currentPage: p };let i=index">
+							<td>{{(5*(p-1)+i)+1}} </td>
+							<td *ngIf="User.userName">{{User.userName}}</td>
+							<td *ngIf="!User.userName">-</td>
+							<td>{{User.email}}</td>
+							<td>{{User.createdAt | date: 'dd/MM/yyyy'}}</td>
+							<td>{{User.createdAt | date: 'hh:mm a'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="justify-content-center w-100">
+				<pagination-controls id="pagination1" (pageChange)="p = $event"></pagination-controls>
+			</div>
+		</div>
+	</div>
+	<div class="col">
+		<div class="card shadow" id="allRecords">
+			<div class="card-header border-0">
+				<h3 class="mb-0">User Feedback</h3>
+			</div>
+			<div class="table-responsive">
+				<table class="table align-items-center table-flush">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Sr. No.</th>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Submitted At</th>
+							<th scope="col">View More</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							*ngFor="let user of feedback_array|paginate: { id: 'pagination2',itemsPerPage: 5, currentPage: Page };let i=index">
+							<td>{{(5*(Page-1)+i)+1}} </td>
+							<td>{{user.name}}</td>
+							<td>{{user.email}}</td>
+							<td>{{user.createdAt | date: 'short'}}</td>
+							<td> <a href="void(0)" style="cursor:pointer;" aria-hidden="true" data-toggle="modal"
+									data-target="#feedbackmodal" (click)="viewMore(user)">View
+									Detail</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="justify-content-center w-100">
+				<pagination-controls id="pagination1" (pageChange)="p = $event"></pagination-controls>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="feedbackmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="text-center">User Feedback</h3>
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body mx-3" *ngIf="singlefeedback">
+				<div class="row">
+					<div class="col-3 my-2">
+						<h4 class="text-primary">Name:</h4>
+					</div>
+					<div class="col-9 my-2">
+						<h4>{{singlefeedback.name}}</h4>
+					</div>
+					<div class="col-3 my-2">
+						<h4 class="text-primary">Email:</h4>
+					</div>
+					<div class="col-9 my-2">
+						<h4>{{singlefeedback.email}}</h4>
+					</div>
+					<div class="col-3 my-2">
+						<h4 class="text-primary">Mobile:</h4>
+					</div>
+					<div class="col-9 my-2">
+						<h4>{{singlefeedback.mobile}}</h4>
+					</div>
+					<div class="col-3 my-2">
+						<h4 class="text-primary">Message:</h4>
+					</div>
+					<div class="col-9 my-2">
+						<h4>{{singlefeedback.message}}</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 

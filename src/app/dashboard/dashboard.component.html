@@ -1,0 +1,207 @@
+<!-- <div class="row">
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<div class="card card-stats">
+			<div class="card-header card-header-warning card-header-icon">
+				<div class="card-icon">
+					<i class="fa fa-user" aria-hidden="true"></i>
+				</div>
+				<h3 class="card-title">Total Users {{userCount}}</h3>
+			</div>
+			<div class="card-footer">
+				<div class="stats">
+					<a style="cursor: pointer;color: #cb293f" routerLink="/user-status">View Details</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<div class="card card-stats">
+			<div class="card-header card-header-warning card-header-icon">
+				<div class="card-icon">
+					<i class="fa fa-newspaper-o"></i>
+				</div>
+				<h3 class="card-title">Total News Post {{postCount}}</h3>
+			</div>
+			<div class="card-footer">
+				<div class="stats">
+					<a style="cursor: pointer;color: #cb293f" routerLink="/trivia-posts">View Details</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<button class="btn btn-primary mb-5" style="float: right" routerLink="/trivia-posts">View All</button>
+<div class="card" id="allRecords">
+	<div class="card-header card-header-primary">
+		<h4 class="card-title ">Latest Trivia Posts</h4>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table">
+				<thead class="text-primary">
+					<th>Sr. No.</th>
+					<th>Category</th>
+					<th>Title</th>
+					<th>Date</th>
+					<th>English Views</th>
+					<th>Hindi Views</th>
+				</thead>
+				<tbody>
+					<tr
+						*ngFor="let news of news_array|paginate: { id: 'pagination2',itemsPerPage: 5, currentPage: Page };let i=index">
+						<td>{{(5*(Page-1)+i)+1}} </td>
+						<td>{{news.newsCategory}}</td>
+						<td
+							style="display: inline-block;width: 180px;white-space: nowrap;overflow: hidden !important;text-overflow:ellipsis;">
+							{{news.newsTitleEnglish}}</td>
+						<td>{{news.createdAt| date: 'short'}}</td>
+						<td>{{news.englishViews}}</td>
+						<td>{{news.hindiViews}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="justify-content-center w-100">
+				<pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls>
+			</div>
+		</div>
+	</div>
+</div> -->
+<div class="header bg-gradient-primary pb-5 pt-4">
+	<h1 class="text-uppercase pl-3 text-white">Dashboard</h1>
+	<div class="container-fluid">
+		<div class="header-body">
+			<div class="row">
+				<div class="col-xl-3 col-lg-6">
+					<div class="card card-stats mb-4 mb-xl-0">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<h5 class="card-title text-uppercase text-muted mb-0">Total users</h5>
+									<span class="h2 font-weight-bold mb-0">{{userCount}}</span>
+								</div>
+								<div class="col-auto">
+									<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+										<i class="fas fa-users"></i>
+									</div>
+								</div>
+							</div>
+							<p class="mt-3 mb-0 text-muted text-sm">
+									<a style="cursor: pointer" routerLink="/user-status">View Details</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6">
+					<div class="card card-stats mb-4 mb-xl-0">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<h5 class="card-title text-uppercase text-muted mb-0">Total Category</h5>
+									<span class="h2 font-weight-bold mb-0">{{categoryCount}}</span>
+								</div>
+								<div class="col-auto">
+									<div class="icon icon-shape bg-info text-white rounded-circle shadow">
+										<i class="fa fa-th"></i>
+									</div>
+								</div>
+							</div>
+							<p class="mt-3 mb-0 text-muted text-sm">
+									<a style="cursor: pointer;color: #cb293f" routerLink="/categories">View Details</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6">
+					<div class="card card-stats mb-4 mb-xl-0">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<h5 class="card-title text-uppercase text-muted mb-0">Total Trivia Posts</h5>
+									<span class="h2 font-weight-bold mb-0">{{postCount}}</span>
+								</div>
+								<div class="col-auto">
+									<div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+										<i class="fas fa-newspaper-o"></i>
+									</div>
+								</div>
+							</div>
+							<p class="mt-3 mb-0 text-muted text-sm">
+									<a style="cursor: pointer;color: #cb293f" routerLink="/trivia-posts">View Details</a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-3 col-lg-6">
+					<div class="card card-stats mb-4 mb-xl-0">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<h5 class="card-title text-uppercase text-muted mb-0">Total Pending Post</h5>
+									<span class="h2 font-weight-bold mb-0">{{pendingPostCount}}</span>
+								</div>
+								<div class="col-auto">
+									<div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+										<i class="fa fa-clock-o"></i>
+									</div>
+								</div>
+							</div>
+							<p class="mt-3 mb-0 text-muted text-sm">
+									<a style="cursor: pointer;color: #cb293f" routerLink="/pending-posts">View Details</a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row mt-2">
+	<div class="col-xl mb-5 mb-xl-0">
+		<div class="card shadow">
+			<div class="card-header border-0">
+				<div class="row align-items-center">
+					<div class="col">
+						<h3 class="mb-0">Latest Trivia Posts</h3>
+					</div>
+					<div class="col text-right">
+						<a href="#!" class="btn btn-sm btn-primary">View All</a>
+					</div>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<!-- Projects table -->
+				<table class="table align-items-center table-flush">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Sr. No.</th>
+							<th scope="col">Category</th>
+							<th scope="col">Title</th>
+							<th scope="col">Date</th>
+							<th scope="col">English Views</th>
+							<th scope="col">Hindi Views</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							*ngFor="let news of news_array|paginate: { id: 'pagination2',itemsPerPage: 5, currentPage: Page };let i=index">
+							<td>{{(5*(Page-1)+i)+1}}</td>
+							<td>{{news.newsCategory}}</td>
+							<td
+								style="display: inline-block;width: 180px;white-space: nowrap;overflow: hidden !important;text-overflow:ellipsis;">
+								{{news.newsTitleEnglish}}</td>
+							<td>{{news.createdAt| date: 'short'}}</td>
+							<td>{{news.englishViews}}</td>
+							<td>{{news.hindiViews}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="justify-content-center w-100 mt-2">
+					<pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

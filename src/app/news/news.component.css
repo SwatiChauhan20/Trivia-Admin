@@ -1,0 +1,46 @@
+.ck-blurred .ck .ck-content .ck-editor__editable .ck-rounded-corners .ck-editor__editable_inline {
+  border: 5px solid black!important;
+}
+
+td {
+  height: 100px;
+  overflow: auto;
+}
+
+label.input-file-button {
+  background-color: #f84e5c;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+label.input-file-button span {
+  cursor: pointer;
+}
+
+.input-file-button input[type="file"] {
+  display: none;
+}
+
+.cke_editable {
+  color: black!important;
+}
+
+/* .header-bg {
+  background-image: url("../../assets/img/newspaper-wallpaper.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  position: relative;
+}
+
+.header-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: linear-gradient(#f94e5c , #825ee4);
+  z-index: 11;
+} */

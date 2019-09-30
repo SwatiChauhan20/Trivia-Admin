@@ -1,0 +1,173 @@
+<!-- <div class="container">
+	<div class="row">
+		<button class="btn btn-primary float-right ml-auto" data-toggle="modal"
+			data-target="#modaladdTechnologyForm">Add
+			Category</button>
+
+		<div class="card" id="allRecords">
+			<div class="card-header card-header-primary">
+				<h4 class="card-title ">Live Catagory</h4>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead class=" text-primary">
+							<th>#</th>
+							<th>Category Title</th>
+							<th class="text-center">Total Live Post</th>
+							<th class="text-center" colspan="2">Action</th>
+						</thead>
+						<tbody>
+							<tr
+								*ngFor="let category of category_array| paginate: { itemsPerPage: 12, currentPage: P };let i=index">
+								<td>{{i+1}}</td>
+								<td>{{category.categoryTitle}}</td>
+								<td class="text-center">{{category.postCount}}</td>
+								<td class="text-center"> <i class="fas fa-edit" style="cursor:pointer;"
+										aria-hidden="true" data-toggle="modal" data-target="#myModal"
+										(click)="editCat(category)"></i></td>
+								<td class="text-center"><i class="fas fa-trash" style="cursor:pointer;"
+										(click)="deleteCategory(category.categoryId)"></i> </td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="justify-content-center w-100">
+						<pagination-controls (pageChange)="P = $event"></pagination-controls>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+	</div>
+</div> -->
+
+
+
+
+
+<div class="header header-bg bg-gradient-primary pb-3 pt-4">
+	<h1 class="text-uppercase pl-3 text-white">Categories</h1>
+</div>
+<div class="row">
+	<div class="col">
+		<div class="card shadow" id="allRecords">
+			<div class="card-header">
+				<div class="row align-items-center">
+					<div class="col">
+						<h3 class="mb-0">Live Catagory</h3>
+					</div>
+					<div class="col text-right">
+						<a href="#!" class="btn btn-primary"  data-toggle="modal"
+						data-target="#modaladdTechnologyForm">Add Category</a>
+					</div>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table align-items-center table-flush">
+					<thead class="thead-light">
+						<tr>
+							<th>#</th>
+							<th scope="col">Category Title</th>
+							<th scope="col">Total Live Post</th>
+							<th scope="col">Edit</th>
+							<th scope="col">Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							*ngFor="let category of category_array| paginate: { itemsPerPage: 12, currentPage: P };let i=index">
+							<td>{{i+1}}</td>
+							<td scope="row">
+								<div class="media align-items-center">
+
+									<div class="media-body">
+										<span class="mb-0 text-sm">{{category.categoryTitle}}</span>
+									</div>
+								</div>
+							</td>
+							<td>{{category.postCount}}</td>
+							<td><i class="fas fa-edit fa-1x text-info ml-2" style="cursor:pointer;" aria-hidden="true"
+									data-toggle="modal" data-target="#myModal" (click)="editCat(category)"></i>
+							</td>
+							<td> <i class="fas fa-trash fa-1x text-danger ml-4" style="cursor:pointer;"
+									(click)="deleteCategory(category.categoryId)"></i>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="justify-content-center w-100">
+				<pagination-controls (pageChange)="P = $event"></pagination-controls>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- add category modal start-->
+<div class="modal fade" id="modaladdTechnologyForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="text-center">Add Catagory</h4>
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body mx-3">
+				<form [formGroup]="category_form">
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="form-group">
+								<label class="bmd-label-floating ml-2">Category Title:</label>
+								<input type="text" formControlName="categoryTitle" class="form-control"
+									required="required" [(ngModel)]="categories.categoryTitle">
+							</div>
+						</div>
+					</div>
+					<div class="d-flex justify-content-center">
+						<button type="submit" class="btn btn-primary" name="categories_submit"
+							(click)="addCategory(categories)" [disabled]="!category_form.valid">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- add category modal end -->
+<!-- edit modal start -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="text-center">Edit Catagory</h4>
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body mx-3 p-0">
+				<form [formGroup]="category_form">
+					<div class="col-md-12">
+						<div class="form-group">
+							<form [formGroup]="editcatr_form" *ngIf="singleCat">
+								<div class="form-group">
+									<h4>Category Title:</h4>
+									<input type="text" id="hey" value="{{singleCat.categoryId}}" hidden>
+									<input type="text" formControlName="categoryTitle"
+										[(ngModel)]="singleCat.categoryTitle" class="form-control" required="required"
+										[(ngModel)]="categories.categoryTitle">
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="d-flex justify-content-center">
+						<button type="submit" class="btn btn-primary" name="categories_submit"
+							(click)="updateCat(singleCat)" [disabled]="!category_form.valid">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- edit modal end -->

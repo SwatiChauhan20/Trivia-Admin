@@ -1,0 +1,167 @@
+<!-- <div class="container"><br>
+	<form [formGroup]="details">
+		<div class="row">
+			<div class="col-12">
+				<span class="text-dark">App logo: </span>
+				<input type="file" accept=".jpeg, .jpg, .png, .gif" formControlName="logo"
+					[(ngModel)]="otherDetails.logo" (change)="logoImage($event)">
+			</div>
+			<div class="col-md-6">
+				<h6 class="text-primary">Privacy Policy: </h6>
+				<ckeditor [config]="config" formControlName="policy" [(ngModel)]="otherDetails.policy"></ckeditor>
+			</div>
+			<div class="col-md-6">
+				<h6 class="text-primary">Terms and Condition:</h6>
+				<ckeditor [config]="config" formControlName="terms" [(ngModel)]="otherDetails.terms"></ckeditor>
+			</div>
+
+			<div class="col-md-12">
+				<input type="submit" name="" class="btn btn-primary float-right ml-auto"
+					(click)="extraDetails(otherDetails)" [disabled]="!details.valid">
+			</div>
+
+			<div class="col-md-6 privacy" *ngFor="let other of other_details">
+				<h3 class="text-primary">Privacy: </h3>
+				<div class="card p-3">
+					<span [innerHTML]="other.policy"></span>
+				</div>
+			</div>
+			<div class="col-md-6 terms" *ngFor="let other of other_details">
+				<h3 class="text-primary">Terms & Condition: </h3>
+				<div class="card p-3">
+					<span [innerHTML]="other.terms"></span>
+				</div>
+			</div>
+		</div>
+	</form>
+</div> -->
+
+<div class="header header-bg bg-gradient-primary pb-3 pt-4">
+	<h1 class="text-uppercase pl-3 text-white">Other Details</h1>
+</div>
+<div class="container-fluid">
+	<form [formGroup]="details">
+		<div class="row">
+			<div class="card bg-secondary shadow">
+
+				<div class="card-body">
+					<form [formGroup]="details">
+						<div class="row">
+							<div class="col-md-2">
+								<span class="text-dark mr-3">App logo: </span>
+								<label class="input-file-button" for="hello1"><span> Choose File</span>
+									<input type="file" id="hello1" accept=".jpeg, .jpg, .png, .gif"
+										formControlName="logo" [(ngModel)]="otherDetails.logo"
+										(change)="logoImage($event)">
+								</label>
+							</div>
+							<div class="col-md-10">
+								<div *ngIf="url">
+									<img [src]="url" style="height: 200px; width: 200px;">
+								</div>
+								<!-- <div *ngIf="!url">
+									<img src="{{mediaPath}}{{otherDetails.newsImage}}"
+										style="height: 200px; width: 200px;">
+								</div> -->
+							</div>
+						</div>
+						<!-- Address -->
+						<div class="row">
+							<div class="col-md-6">
+								<h4 class="text-primary">Privacy Policy: </h4>
+								<ckeditor [config]="config" formControlName="policy" [(ngModel)]="otherDetails.policy" style="color: black">
+								</ckeditor>
+							</div>
+							<div class="col-md-6">
+								<h4 class="text-primary">Terms and Condition:</h4>
+								<ckeditor [config]="config" formControlName="terms" [(ngModel)]="otherDetails.terms" style="color: black">
+								</ckeditor>
+							</div>
+						</div>
+						<hr class="my-4" />
+						<div class="row">
+							<div class="col-md-12">
+								<input type="submit" name="" class="btn btn-primary float-right ml-auto"
+									(click)="extraDetails(otherDetails)" [disabled]="!details.valid">
+							</div>
+						</div>
+						<hr class="my-4" />
+						<div class="row">
+							<div class="col-md-6 privacy" *ngFor="let other of other_details">
+								<h3 class="text-primary">Privacy & Policy: </h3>
+								<div class="card p-3">
+									<span [innerHTML]="other.policy"></span>
+								</div>
+							</div>
+							<div class="col-md-6 terms" *ngFor="let other of other_details">
+								<h3 class="text-primary">Terms & Condition: </h3>
+								<div class="card p-3">
+									<span [innerHTML]="other.terms"></span>
+								</div>
+								<div class="text-center">
+									<button type="button" class="btn btn-primary float-right ml-auto"
+										style="cursor:pointer" data-toggle="modal" data-target="#myModal"
+										(click)="editOtherDetail(other)" aria-hidden="true">Edit Detail</button>
+								</div>
+
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="text-center">Edit Policy</h4>
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body mx-3">
+				<form [formGroup]="editDetail" *ngIf="other">
+					<input type="hidden" id="hey" name="termsId" value="{{other.termsId}}">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="bmd-label-floating">Application Link</label>
+							<input class="form-control" type="text" formControlName="applink"
+								[(ngModel)]="other.applink">
+						</div>
+						<div class="form-group">
+							<ckeditor formControlName="policy" [(ngModel)]="other.policy" [config]="config">
+							</ckeditor>
+						</div>
+						<div class="form-group">
+							<ckeditor formControlName="terms" [(ngModel)]="other.terms" [config]="config">
+							</ckeditor>
+						</div>
+						<div class="col-md-6">
+								<label class="input-file-button" for="hello1"><span> Choose File</span>
+									<input type="file" id="hello1" accept=".jpeg, .jpg, .png, .gif"
+										formControlName="logo" [(ngModel)]="otherDetails.logo"
+										(change)="logoImage($event)">
+								</label>
+							<!-- <input type="file" accept=".jpeg, .jpg, .png, .gif" formControlName="logo"
+								[(ngModel)]="otherDetails.logo" (change)="logoImage($event)"> -->
+						</div>
+						<div class="col-md-6" *ngIf="url">
+							<img [src]="url" height="50px" width="50px">
+						</div>
+						<div class="col-md-6" *ngIf="!url">
+							<img src="{{mediaPath}}{{other.logo}}" height="100px" width="100px">
+						</div>
+					</div>
+					<div class="d-flex justify-content-center">
+						<button type="button" class="btn btn-primary mb-5" data-dismiss="modal"
+							(click)="updateDetail(editDetail.value)">Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
