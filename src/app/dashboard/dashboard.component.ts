@@ -23,14 +23,21 @@ export class DashboardComponent implements OnInit {
 	userRole: any;
 	url: any;
 	config: any;
-	constructor(public _newsService: NewsService, public _userService: SubAdminService , public _categoryService: CategoryService) { }
+	constructor(public _newsService: NewsService, public _userService: SubAdminService, public _categoryService: CategoryService) { }
 	userCount: any;
 	postCount: any;
 	Page: Number = 1;
 	ngOnInit() {
-		$(document).ready(function(){
+		$(document).ready(function () {
 			$('#hey').removeClass("helloo");
 		});
+
+		if (/\/login/g.test(window.location.href)) {
+			$("#sidebarCollapse").addClass("helloo");
+		} else {
+			$("#sidebarCollapse").removeClass("helloo");
+		}
+
 		this.getNews();
 		this.getAllUsers();
 		this.getAllCategories();
@@ -62,24 +69,22 @@ export class DashboardComponent implements OnInit {
 	}
 	//get all  categories count
 	getAllCategories(): void {
-        this._categoryService.getAll().subscribe(
-            (res: SubAdmin[]) => {
-                this.categoryCount = res.length;
-                console.log('Category Count', this.categoryCount);
-            },
-            (err) => {
-                this.error = err;
-            });
+		this._categoryService.getAll().subscribe(
+			(res: SubAdmin[]) => {
+				this.categoryCount = res.length;
+			},
+			(err) => {
+				this.error = err;
+			});
 	}
 	//get all pending post count 
 	getAllPendingNews(): void {
-        this._newsService.getAllPendingNews().subscribe(
-            (res: any) => {
-                this.pendingPostCount = res.data.length;
-                console.log('Pending Post Count', this.pendingPostCount);
-            },
-            (err) => {
-                this.error = err;
-            });
-    }
+		this._newsService.getAllPendingNews().subscribe(
+			(res: any) => {
+				this.pendingPostCount = res.data.length;
+			},
+			(err) => {
+				this.error = err;
+			});
+	}
 }

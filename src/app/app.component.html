@@ -1,116 +1,9 @@
-<!-- <nav class="navbar navbar-expand-lg bg-dark navbar-dark" *ngIf="auth.isLoggednIn()">
-	<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="collapsibleNavbar">
-		<ul class="navbar-nav">
-			<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn()">
-				<a class="nav-link" routerLink="/dashboard">Dashboard</a>
-			</li>
-			<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
-				<a class="nav-link" routerLink="/categories">Categories</a>
-			</li>
-			<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn()">
-				<a class="nav-link" routerLink="/trivia-posts">Trivia Posts</a>
-			</li>
-			<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
-				<a class="nav-link" routerLink="/sub-admin">Sub Admin</a>
-			</li>
-			<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
-				<a class="nav-link" routerLink="/pending-posts">Pending Posts</a>
-			</li>
-			<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
-				<a class="nav-link" routerLink="/user-status">User Status</a>
-			</li>
-			<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
-				<a class="nav-link" routerLink="/other-details">Other Details</a>
-			</li>
-			<li class="nav-item" *ngIf="auth.isLoggednIn()">
-				<a class="nav-link" outerLink="/login" (click)="Logout()">Logout</a>
-			</li>
-		</ul>
-	</div>
-</nav>
-<router-outlet></router-outlet> -->
-
-
-<!-- <div class="wrapper">
-	<div class="sidebar col-xs-12 col-sm-4 col-md-3" style="background-size: cover; " id="sidebar" data-color="purple"
-		data-background-color="white" data-image="assets/img/sidebar-1.jpg" *ngIf="auth.isLoggednIn()">
-		<div class="sidebar-wrapper" id="scroller">
-			<div class="logo"
-				style="background-image: url('assets/Trivia.png'); width: 230px; height:200px; background-size: contain; background-position: center; background-repeat:no-repeat;">
-			</div>
-			<ul class="nav">
-				<li class="nav-item " *ngIf="auth.isLoggednIn() ">
-					<a class="nav-link" routerLink="/dashboard">
-						<i class="material-icons">dashboard</i>
-						<p>Dashboard</p>
-					</a>
-				</li>
-
-				<li class="nav-item ">
-					<a class="nav-link" routerLink="/trivia-posts" *ngIf="auth.isLoggednIn()">
-						<i class="fa fa-newspaper-o"></i>
-						<p>News</p>
-					</a>
-				</li>
-
-				<li class="nav-item ">
-					<a class="nav-link" routerLink="/categories" *ngIf="auth.isLoggednIn() &&  userRole || admin == 'admin'">
-						<i class="fa fa-list-alt"></i>
-						<p>Catagory</p>
-					</a>
-				</li>
-
-				<li class="nav-item ">
-					<a class="nav-link" routerLink="/sub-admin" *ngIf=" auth.isLoggednIn() && userRole || admin == 'admin'">
-						<i class="fa fa-lock" aria-hidden="true" style=" font-size: 36px;"></i>
-						<p>Sub Admin</p>
-					</a>
-				</li>
-
-				<li class="nav-item ">
-					<a class="nav-link" routerLink="/pending-posts" *ngIf=" auth.isLoggednIn() && userRole || admin == 'admin'">
-						<i class="fas fa-id-card-alt"></i>
-						<p>Pending Posts</p>
-					</a>
-				</li>
-				<li class="nav-item ">
-					<a class="nav-link" routerLink="/user-status" *ngIf=" auth.isLoggednIn() && userRole || admin == 'admin'">
-						<i class="fa fa-user" aria-hidden="true" style="font-size: 30px;"></i>
-						<p>User Status</p>
-					</a>
-				</li>
-				<li class="nav-item ">
-					<a class="nav-link" routerLink="/other-details" *ngIf=" auth.isLoggednIn() && userRole || admin == 'admin'">
-						<i class="fas fa-university" style="font-size: 30px;"></i>
-						<p>Other Details</p>
-					</a>
-				</li>
-
-				<li class="nav-item ">
-					<a class="nav-link" style="cursor:pointer;" (click)="Logout()" *ngIf="auth.isLoggednIn()">
-						<i class="fas fa-sign-out-alt" style="font-size: 19px;"></i>
-						<p>Log out</p>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	</div> -->
-
-
 <!-- new design start -->
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main"
 	*ngIf="auth.isLoggednIn()">
 	<div class="container-fluid">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
-			aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
 		<a class="navbar-brand pb-5">
-			<img src="assets/img/brand/Trivia.png" class="navbar-brand-img" alt="..." >
+			<img src="assets/img/brand/Trivia.png" class="navbar-brand-img" alt="...">
 		</a>
 		<div class="collapse navbar-collapse mt-5" id="sidenav-collapse-main">
 			<div class="navbar-collapse-header d-md-none">
@@ -185,10 +78,10 @@
 <!-- new design end -->
 
 
-<div class="main-panel" id="hey">
-	<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
+<div class="main-panel" id="sidebarCollapse">
+	<nav class="navbar navbar-expand-lg navbar-transparent">
 		<div class="container-fluid">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+			<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" aria-controls="navigation-index"
 				aria-expanded="false" aria-label="Toggle navigation" *ngIf="auth.isLoggednIn()">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="navbar-toggler-icon icon-bar"></span>

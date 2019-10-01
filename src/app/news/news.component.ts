@@ -34,6 +34,8 @@ export class NewsComponent implements OnInit {
 	imgURL;
 	urls = new Array<string>();
 
+	submitted = false;
+
 	constructor(public _newsService: NewsService, public _categoryService: CategoryService) {
 		this.news_form = new FormGroup({
 			newsTitleEnglish: new FormControl('', Validators.required),
@@ -74,6 +76,8 @@ export class NewsComponent implements OnInit {
 		this.getCategories();
 		this.getNews();
 	}
+
+	get f() { return this.news_form.controls; }
 
 	hello() {
 		if (this.singleNews) {
@@ -127,37 +131,49 @@ export class NewsComponent implements OnInit {
 	//add news
 	addNews() {
 
-		console.log('News Data:', this.news_form.value);
 
-		const data = new FormData();
-		_.forOwn(this.news_form.value, (value, key) => {
-			data.append(key, value);
-		});
+		this.submitted = true;
 
-		if (this.fileNews.length > 0) {
-			for (let i = 0; i <= this.fileNews.length; i++) {
-				data.append('newsImage', this.fileNews[i]);
+		// stop here if form is invalid
+		if (this.news_form.invalid) {
+			return;
+		} else {
+			const data = new FormData();
+			_.forOwn(this.news_form.value, (value, key) => {
+				data.append(key, value);
+			});
+
+			if (this.fileNews.length > 0) {
+				for (let i = 0; i <= this.fileNews.length; i++) {
+					data.append('newsImage', this.fileNews[i]);
+				}
+
 			}
 
-		}
+			this._newsService.addNews(data).subscribe((res: any) => {
+				this.news_form.reset();
 
-		this._newsService.addNews(data).subscribe((res: any) => {
-			this.news_form.reset();
-			Swal.fire({
-				type: 'success',
-				title: res.message,
-				showConfirmButton: false,
-				timer: 2000
+				$('#modaladdTriviaPost').modal('hide');
+
+				Swal.fire({
+					type: 'success',
+					title: res.message,
+					showConfirmButton: false,
+					timer: 2000
+				})
+				this.getNews();
+			}, err => {
 			})
-			this.getNews();
-		}, err => {
-
-		})
+		}
 	}
 
 	editNews(news) {
 		this.singleNews = news;
-		console.log(this.singleNews);
+	}
+
+	closeModelTriviaPost() {
+		$('#modaladdTriviaPost').modal('hide');
+		this.news_form.reset();
 	}
 
 	//delete news
@@ -188,9 +204,7 @@ export class NewsComponent implements OnInit {
 	}
 
 	updateCat(news) {
-		// console.log((<HTMLInputElement>document.getElementById("please")));
 		news["newsId"] = (<HTMLInputElement>document.getElementById("please")).value;
-		console.log("news in update cat", news);
 		const data = new FormData();
 		_.forOwn(this.editnews_form.value, (value, key) => {
 			data.append(key, value);
@@ -203,9 +217,6 @@ export class NewsComponent implements OnInit {
 		}
 		this._newsService.updateNews(data, news.newsId).subscribe((res: any) => {
 
-			console.log('NewsId', news.newsId);
-
-			console.log("res=========>", res);
 			this.editnews_form.reset();
 			Swal.fire({
 				type: 'success',
@@ -215,9 +226,7 @@ export class NewsComponent implements OnInit {
 			})
 			this.getCategories();
 			this.getNews();
-		},
-			err => {
-				console.log(err);
-			})
+		}, err => {
+		})
 	}
 }

@@ -34,14 +34,23 @@ export class LoginComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		
+
+		if (/\/login/g.test(window.location.href)) {
+			console.log("Hye");
+			$("#sidebarCollapse").addClass("helloo");
+		} else {
+
+			console.log(window.location.href);
+			$("#sidebarCollapse").removeClass("helloo");
+		}
+
 	}
 
 	login(detail) {
 		$('#hey1').click(function () {
 			$('#hey').removeClass("helloo");
-			
-		  });
+
+		});
 		this.loginService.authorize(detail).subscribe((res: any) => {
 			console.log("login user response", res);
 			this.msg = 'Logged in successfully! ';

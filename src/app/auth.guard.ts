@@ -17,7 +17,6 @@ export class AuthGuard implements CanActivate {
 		})
 	}
 	canActivate(): boolean {
-		console.log("localstorage admin details ", this.subUserRole);
 		if (this.accessToken) {
 			return true
 		} else {
@@ -36,11 +35,8 @@ export class AdminGuard implements CanActivate {
 	admin = JSON.parse(localStorage.getItem("userRole"));
 	constructor(private router: Router, public auth: LoginService) {
 		this.auth.userRole.subscribe((data: any) => {
-			console.log("he bhagvan ama login user avu joye", data);
 			this.userRole = data.test;
-			console.log(this.userRole)
 		})
-		console.log("admin user details ", this.admin);
 	}
 
 	canActivate(): boolean {

@@ -193,3 +193,79 @@ label{
 .ngx-pagination .current{
 	background-color: #fa5360!important;
 }
+.navbar-vertical.navbar-expand-md .navbar-brand {
+    display: table;
+    text-align: center;
+    padding: 0 !important;
+	margin: 0;
+	height: auto;
+}
+.navbar-vertical .navbar-collapse:before{
+	display: none;
+}
+.navbar .navbar-collapse.collapse{
+	display: block !important;
+}
+@media(max-width: 991px){
+	.navbar-vertical.navbar-expand-md {
+		display: block !important;
+		position: fixed !important;
+		top: 0 !important;
+		bottom: 0 !important;
+		width: 100% !important;
+		max-width: 250px !important;
+		height: 100vh !important;
+		overflow-y: auto !important;
+		-webkit-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+    	-moz-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+		-o-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+		-ms-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+		transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+	}
+	.navbar-vertical.navbar-expand-md.fixed-left{
+		left: auto;
+		right: -250px;
+	}
+	.navbar-collapse {
+		-webkit-transition: none !important;
+		-moz-transition: none !important;
+		-o-transition: none !important;
+		-ms-transition: none !important;
+		transition: none !important;
+	}
+	.nav-open .navbar-vertical.navbar-expand-md.fixed-left{
+		right: 0px;
+		padding-left: 0;
+    	padding-right: 0;
+	}
+	.navbar-collapse {
+		position: relative !important;
+		display: block !important;
+		height: auto !important;
+		width: 100% !important;
+	}
+	.navbar-vertical.navbar-expand-md .navbar-brand{
+		margin: 0px auto 30px;
+	}
+	.navbar .collapse .navbar-nav .nav-item .nav-link,
+	.navbar-vertical .navbar-collapse{
+		margin: 0 !important;
+	}
+	.navbar-vertical.navbar-expand-md .navbar-nav{
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+	.navbar .collapse .navbar-nav .nav-item .nav-link{
+		font-size: 12px;
+		line-height: 24px;
+	}
+	.navbar-collapse .navbar-collapse-header{
+		display: none;
+	}
+	.navbar-collapse{
+		opacity: 1 !important;
+	}
+	.main-panel>.content{
+		padding-top: 0;
+	}
+}

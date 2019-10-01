@@ -21,6 +21,7 @@ export class OtherDetailsComponent implements OnInit {
     error = '';
     mediaPath = config.mediaApiUrl;
     other_details: OtherDetails[];
+    submitted: any = false;
     other: any;
     url: any;
     constructor(public _subAdmin: SubAdminService) {
@@ -42,7 +43,6 @@ export class OtherDetailsComponent implements OnInit {
         var self = this;
         this.getOtherDetails();
         $(document).on('click', 'body *', function () {
-            // console.log("Hey");
             self.hello();
         });
         this.getOtherDetails();
@@ -66,33 +66,44 @@ export class OtherDetailsComponent implements OnInit {
             this.getOtherDetails();
         }
     }
+
+    get f() { return this.details.controls; }
+
     extraDetails(otherDetails) {
-        const data = new FormData();
-        _.forOwn(this.details.value, (value, key) => {
-            data.append(key, value);
-        });
-        console.log(this.fileLogo.length);
-        if (this.fileLogo.length > 0) {
-            for (let i = 0; i <= this.fileLogo.length; i++) {
-                data.append('logo', this.fileLogo[i]);
+
+        this.submitted = true;
+        // stop here if form is invalid
+        if (this.details.invalid) {
+            return;
+        } else {
+            const data = new FormData();
+            _.forOwn(this.details.value, (value, key) => {
+                data.append(key, value);
+            });
+            console.log(this.fileLogo.length);
+            if (this.fileLogo.length > 0) {
+                for (let i = 0; i <= this.fileLogo.length; i++) {
+                    data.append('logo', this.fileLogo[i]);
+                }
             }
-        }
-        this._subAdmin.addOtherDetails(data).subscribe((res: any) => {
-            Swal.fire({
-                type: 'success',
-                title: res.message,
-                showConfirmButton: false,
-                timer: 2000
+            this._subAdmin.addOtherDetails(data).subscribe((res: any) => {
+                Swal.fire({
+                    type: 'success',
+                    title: res.message,
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                $('#policyModal').modal('hide');
+                this.details.reset();
+                this.getOtherDetails();
+            }, err => {
+                console.log(err);
             })
-            this.details.reset();
-            this.getOtherDetails();
-        }, err => {
-            console.log(err);
-        })
+        }
     }
+
     updateDetail(details) {
         details["termsId"] = (<HTMLInputElement>document.getElementById("termsId")).value;
-        console.log('Other Detail Inside Update:', details);
         const data = new FormData();
         _.forOwn(details, (value, key) => {
             data.append(key, value);

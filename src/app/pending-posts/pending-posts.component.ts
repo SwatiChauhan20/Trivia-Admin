@@ -23,7 +23,6 @@ export class PendingPostsComponent implements OnInit {
   //get all category
   getPendingNews(): void {
     this._newsService.getAllPendingNews().subscribe((res: any) => {
-      console.log('Resonse:', res.data);
       this.newList = res.data;
     }, (err) => {
       console.log('Resonse:', err);
@@ -31,11 +30,7 @@ export class PendingPostsComponent implements OnInit {
   }
 
   approveNews(newsId): void {
-    console.log('Approve News Click', newsId);
-
     this._newsService.approveNews(newsId).subscribe((res: any) => {
-      console.log('Resonse:', res.data);
-
       Swal.fire({
         type: 'success',
         title: res.message,
@@ -50,10 +45,7 @@ export class PendingPostsComponent implements OnInit {
 
 
   rejectNews(newsId): void {
-    console.log('Reject News Click', newsId);
-
     this._newsService.rejectNews(newsId).subscribe((res: any) => {
-      console.log('Resonse:', res.data);
       Swal.fire({
         type: 'success',
         title: res.message,
@@ -62,7 +54,6 @@ export class PendingPostsComponent implements OnInit {
       })
       this.getPendingNews();
     }, (err) => {
-      console.log('Resonse:', err);
     });
   }
 

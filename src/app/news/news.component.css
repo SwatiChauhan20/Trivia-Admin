@@ -6,7 +6,10 @@ td {
   height: 100px;
   overflow: auto;
 }
-
+td.description{
+  width: 400px;
+  white-space: normal;
+}
 label.input-file-button {
   background-color: #f84e5c;
   color: white;

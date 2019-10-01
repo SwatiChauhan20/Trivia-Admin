@@ -22,18 +22,21 @@ export class CategoriesComponent implements OnInit {
 	url: any;
 	catdata: any;
 	P: Number = 1;
-	category_form : FormGroup;
-	editcatr_form : FormGroup;
+	category_form: FormGroup;
+	editcatr_form: FormGroup;
+
+	submitted: any = false;
+
 	constructor(public _categoryService: CategoryService) {
 		this.category_form = new FormGroup({
 			categoryTitle: new FormControl('', Validators.required),
 		});
-	
+
 		this.editcatr_form = new FormGroup({
 			categoryTitle: new FormControl('', Validators.required),
 		});
 
-	 }
+	}
 
 	ngOnInit() {
 		this.getCategories();
@@ -49,7 +52,9 @@ export class CategoriesComponent implements OnInit {
 		}
 	}
 
-	
+	get f() { return this.category_form.controls; }
+
+
 
 	categories = {
 		categoryTitle: "",
@@ -65,7 +70,6 @@ export class CategoriesComponent implements OnInit {
 		this._categoryService.getAll().subscribe(
 			(res: Categories[]) => {
 				this.category_array = res;
-				console.log(this.category_array);
 			},
 			(err) => {
 				this.error = err;
@@ -74,22 +78,26 @@ export class CategoriesComponent implements OnInit {
 
 	// add category
 	addCategory(data) {
-		console.log('Data:', data);
-		this._categoryService.addCategory(data).subscribe((res: any) => {
-			Swal.fire({
-				type: 'success',
-				title: res.message,
-				showConfirmButton: false,
-				timer: 2000
+		this.submitted = true;
+		if (this.category_form.invalid) {
+			return;
+		} else {
+			this._categoryService.addCategory(data).subscribe((res: any) => {
+				Swal.fire({
+					type: 'success',
+					title: res.message,
+					showConfirmButton: false,
+					timer: 2000
+				})
+
+				$('#modaladdTechnologyForm').modal('hide');
+
+				this.category_form.reset();
+				this.getCategories();
+			}, err => {
+				console.log(err);
 			})
-
-			$('#modaladdTechnologyForm').modal('hide');
-
-			this.category_form.reset();
-			this.getCategories();
-		}, err => {
-			console.log(err);
-		})
+		}
 	}
 
 	cat_image(event) {
@@ -98,25 +106,22 @@ export class CategoriesComponent implements OnInit {
 
 	//get data for edit
 	editCat(category) {
-		console.log(category);
 		this.singleCat = category;
 	}
 
 	//delete category
 	deleteCategory(categoryId) {
-		this._categoryService
-			.deleteCategory(categoryId)
-			.subscribe((res: any) => {
-				Swal.fire({
-					type: 'success',
-					title: res.message,
-					showConfirmButton: false,
-					timer: 2000
-				})
-				this.getCategories();
-			}, err => {
-				console.log(err);
+		this._categoryService.deleteCategory(categoryId).subscribe((res: any) => {
+			Swal.fire({
+				type: 'success',
+				title: res.message,
+				showConfirmButton: false,
+				timer: 2000
 			})
+			this.getCategories();
+		}, err => {
+			console.log(err);
+		})
 	}
 
 
@@ -125,14 +130,10 @@ export class CategoriesComponent implements OnInit {
 
 	//for upadting the category
 	updateCat(singleCat) {
-
-		console.log('Single cat:', singleCat);
-
 		this.catdata = {
 			categoryTitle: singleCat.categoryTitle,
 			categoryId: singleCat.categoryId
 		}
-
 		this._categoryService.updateCategory(this.catdata).subscribe((res: any) => {
 			this.editcatr_form.reset();
 			Swal.fire({
@@ -141,14 +142,11 @@ export class CategoriesComponent implements OnInit {
 				showConfirmButton: false,
 				timer: 2000
 			})
-
 			$('#myModal').modal('hide');
-
 			this.getCategories();
-		},
-			err => {
-				console.log(err);
-			})
+		}, err => {
+			console.log(err);
+		})
 	}
 
 	// for image preview on edit click

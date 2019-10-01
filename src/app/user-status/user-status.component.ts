@@ -23,6 +23,7 @@ export class UserStatusComponent implements OnInit {
 	config: any;
 	constructor(public _newsService: NewsService, public _userService: SubAdminService) { }
 	userCount: any;
+	feedbackCount: any;
 	p: Number = 1;
 	Page: Number = 1;
 	singlefeedback: any;
@@ -38,7 +39,6 @@ export class UserStatusComponent implements OnInit {
 			(res: SubAdmin[]) => {
 				this.user_array = res;
 				this.userCount = res.length;
-				console.log(this.user_array);
 			},
 			(err) => {
 				this.error = err;
@@ -53,8 +53,8 @@ export class UserStatusComponent implements OnInit {
 	getUserFeedback(): void {
 		this._userService.getUserFeedback().subscribe(
 			(res: any) => {
-				console.log('Response:', res);
 				this.feedback_array = res.data;
+				this.feedbackCount = res.data.length;
 			},
 			(err) => {
 				this.error = err;
