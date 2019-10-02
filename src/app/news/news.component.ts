@@ -171,10 +171,19 @@ export class NewsComponent implements OnInit {
 		this.singleNews = news;
 	}
 
-	closeModelTriviaPost() {
+	closeModelTriviaPost(news_form) {
 		$('#modaladdTriviaPost').modal('hide');
 		this.news_form.reset();
+		// this.removeValidators(news_form);
 	}
+
+	removeValidators(news_form: FormGroup) {
+		for (const key in news_form.controls) {
+			news_form.get(key).clearValidators();
+			news_form.get(key).updateValueAndValidity();
+		}
+	}
+
 
 	//delete news
 	deleteNews(newsId) {

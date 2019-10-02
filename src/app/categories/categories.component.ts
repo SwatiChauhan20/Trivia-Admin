@@ -30,10 +30,12 @@ export class CategoriesComponent implements OnInit {
 	constructor(public _categoryService: CategoryService) {
 		this.category_form = new FormGroup({
 			categoryTitle: new FormControl('', Validators.required),
+			categoryTitleHn: new FormControl('', Validators.required),
 		});
 
 		this.editcatr_form = new FormGroup({
 			categoryTitle: new FormControl('', Validators.required),
+			categoryTitleHn: new FormControl('', Validators.required),
 		});
 
 	}
@@ -58,6 +60,7 @@ export class CategoriesComponent implements OnInit {
 
 	categories = {
 		categoryTitle: "",
+		categoryTitleHn: "",
 	}
 
 	resetUpdateForm() {
@@ -130,9 +133,12 @@ export class CategoriesComponent implements OnInit {
 
 	//for upadting the category
 	updateCat(singleCat) {
+
+
 		this.catdata = {
 			categoryTitle: singleCat.categoryTitle,
-			categoryId: singleCat.categoryId
+			categoryId: singleCat.categoryId,
+			categoryTitleHn: singleCat.categoryTitleHn
 		}
 		this._categoryService.updateCategory(this.catdata).subscribe((res: any) => {
 			this.editcatr_form.reset();
